@@ -36,6 +36,7 @@ from .vmas.dispersion import TaskConfig as DispersionConfig
 from .vmas.dropout import TaskConfig as DropoutConfig
 from .vmas.give_way import TaskConfig as GiveWayConfig
 from .vmas.navigation import TaskConfig as NavigationConfig
+from .vmas.passage import TaskConfig as PassageConfig
 from .vmas.reverse_transport import TaskConfig as ReverseTransportConfig
 from .vmas.sampling import TaskConfig as SamplingConfig
 
@@ -60,6 +61,7 @@ _task_class_registry = {
     "vmas_balance_config": BalanceConfig,
     "vmas_sampling_config": SamplingConfig,
     "vmas_navigation_config": NavigationConfig,
+    "vmas_passage_config": PassageConfig,
     "vmas_transport_config": TransportConfig,
     "vmas_reverse_transport_config": ReverseTransportConfig,
     "vmas_wheel_config": WheelConfig,

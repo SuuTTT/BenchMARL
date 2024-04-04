@@ -11,7 +11,7 @@ from omegaconf import DictConfig, OmegaConf
 from benchmarl.hydra_config import load_experiment_from_hydra
 
 
-@hydra.main(version_base=None, config_path="conf", config_name="config")
+@hydra.main(version_base=None, config_path="../fine_tuned/vmas/conf", config_name="config")
 def hydra_experiment(cfg: DictConfig) -> None:
     """Runs an experiment loading its config from hydra.
 
