@@ -3,8 +3,8 @@ defaults:
   - vmas_simple_tag_config
 
 max_steps: 100
-num_good_agents: 1
-num_adversaries: 3
+num_good_agents: 3
+num_adversaries: 9
 num_landmarks: 2
 shape_agent_rew: False
 shape_adversary_rew: False

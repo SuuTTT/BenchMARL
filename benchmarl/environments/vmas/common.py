@@ -18,6 +18,7 @@ class VmasTask(Task):
     """Enum for VMAS tasks."""
 
     BALANCE = None
+    DISCOVERY = None
     SAMPLING = None
     NAVIGATION = None
     PASSAGE = None

@@ -37,6 +37,7 @@ from .vmas.dropout import TaskConfig as DropoutConfig
 from .vmas.give_way import TaskConfig as GiveWayConfig
 from .vmas.navigation import TaskConfig as NavigationConfig
 from .vmas.passage import TaskConfig as PassageConfig
+from .vmas.discovery import TaskConfig as DiscoveryConfig
 from .vmas.reverse_transport import TaskConfig as ReverseTransportConfig
 from .vmas.sampling import TaskConfig as SamplingConfig
 
@@ -59,6 +60,7 @@ from .vmas.wind_flocking import TaskConfig as WindFlockingConfig
 # This feature is optional.
 _task_class_registry = {
     "vmas_balance_config": BalanceConfig,
+    "vmas_discovery_config": DiscoveryConfig,  # "DiscoveryConfig" is not defined in the codebase
     "vmas_sampling_config": SamplingConfig,
     "vmas_navigation_config": NavigationConfig,
     "vmas_passage_config": PassageConfig,
