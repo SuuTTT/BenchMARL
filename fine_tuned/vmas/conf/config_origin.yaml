@@ -1,7 +1,7 @@
 defaults:
   - experiment: base_experiment
-  - algorithm: ???
-  - task: ???
+  - algorithm: mappo
+  - task: vmas/discovery
   - model: layers/mlp
   - model@critic_model: layers/mlp
   - _self_
@@ -15,8 +15,10 @@ seed: 0
 
 experiment:
 
-  sampling_device: "cuda"
-  train_device: "cuda"
+  sampling_device: cpu #"cuda"
+  train_device: cpu #"cuda"
+  #sampling_device: "cuda"
+  #train_device: "cuda"
 
   share_policy_params: True
   prefer_continuous_actions: True
@@ -35,12 +37,12 @@ experiment:
   exploration_anneal_frames: 1_000_000
 
   max_n_iters: null
-  max_n_frames: 10_000_000
+  max_n_frames: 8_000_000
 
-  on_policy_collected_frames_per_batch: 60_000
-  on_policy_n_envs_per_worker: 600
+  on_policy_collected_frames_per_batch: 100_000
+  on_policy_n_envs_per_worker: 500
   on_policy_n_minibatch_iters: 45
-  on_policy_minibatch_size: 4096
+  on_policy_minibatch_size: 4096 #8192 #4096 
 
   off_policy_collected_frames_per_batch: 6000
   off_policy_n_envs_per_worker: 60
@@ -50,9 +52,9 @@ experiment:
 
   evaluation: True
   render: True
-  evaluation_interval: 120_000
+  evaluation_interval: 100_000
   evaluation_episodes: 200
 
   save_folder: null
   restore_file: null
-  checkpoint_interval: 300_000
+  checkpoint_interval: 4_000_000
