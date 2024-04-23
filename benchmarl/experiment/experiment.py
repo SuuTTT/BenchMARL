@@ -387,7 +387,11 @@ class Experiment(CallbackNotifier):
                 device=self.config.sampling_device,
             )
         )
-
+        reset=test_env.reset()
+        print(test_env.observation_spec)
+        
+        print(self.task.observation_spec(test_env))
+        print(self.task.observation_spec(env_func()))
         self.observation_spec = self.task.observation_spec(test_env)
         self.info_spec = self.task.info_spec(test_env)
         self.state_spec = self.task.state_spec(test_env)
@@ -408,6 +412,7 @@ class Experiment(CallbackNotifier):
         else:
             self.env_func = lambda: TransformedEnv(env_func(), transform.clone())
 
+        #self.env_func = lambda: TransformedEnv(env_func(), 
         self.test_env = test_env.to(self.config.sampling_device)
 
     def _setup_algorithm(self):
@@ -438,13 +443,15 @@ class Experiment(CallbackNotifier):
 
     def _setup_collector(self):
         self.policy = self.algorithm.get_policy_for_collection()
-
+        print(self.policy)
         self.group_policies = {}
         for group in self.group_map.keys():
             group_policy = self.policy.select_subsequence(out_keys=[(group, "action")])
             assert len(group_policy) == 1
             self.group_policies.update({group: group_policy[0]})
-
+        reset=self.env_func().reset()   
+        print(reset)
+        print(self.env_func().observation_spec)
         self.collector = SyncDataCollector(
             self.env_func,
             self.policy,
@@ -456,6 +463,7 @@ class Experiment(CallbackNotifier):
             if not self.on_policy
             else 0,
         )
+        
 
     def _setup_name(self):
         self.algorithm_name = self.algorithm_config.associated_class().__name__.lower()

@@ -1,7 +1,7 @@
 defaults:
   - experiment: base_experiment
   - algorithm: qmix
-  - task: vmas/give_way
+  - task: vmas/discovery
   - model: layers/mlp
   - model@critic_model: layers/mlp
   - _self_
@@ -18,10 +18,10 @@ seed: 0
 
 experiment:
 
-  #sampling_device: cpu #"cuda"
-  #train_device: cpu #"cuda"
-  sampling_device: "cuda"
-  train_device: "cuda"
+  sampling_device: cpu #"cuda"
+  train_device: cpu #"cuda"
+  #sampling_device: "cuda"
+  #train_device: "cuda"
 
   share_policy_params: False # false for give_way
   prefer_continuous_actions: True
@@ -40,25 +40,24 @@ experiment:
   exploration_anneal_frames: 100_000_000
 
   max_n_iters: null
-  max_n_frames: 60_000_000 #1500_000_000
+  max_n_frames: 10_000_000
 
-  on_policy_collected_frames_per_batch: 6553600 # 100_000
-  on_policy_n_envs_per_worker: 65536 #5000
-  on_policy_n_minibatch_iters: 45 # 45
-  on_policy_minibatch_size: 65536 #8192 # 4096
-  
+  on_policy_collected_frames_per_batch: 60_000
+  on_policy_n_envs_per_worker: 600
+  on_policy_n_minibatch_iters: 45
+  on_policy_minibatch_size: 4096
 
-  off_policy_collected_frames_per_batch: 600000
-  off_policy_n_envs_per_worker: 6000
+  off_policy_collected_frames_per_batch: 6000
+  off_policy_n_envs_per_worker: 60
   off_policy_n_optimizer_steps: 1000
-  off_policy_train_batch_size: 32768
-  off_policy_memory_size: 10_000_000
+  off_policy_train_batch_size: 128
+  off_policy_memory_size: 1_000_000
 
   evaluation: True
   render: True
-  evaluation_interval: 600000
-  evaluation_episodes: 300
+  evaluation_interval: 120_000
+  evaluation_episodes: 200
 
   save_folder: null
   restore_file: null
-  checkpoint_interval: 60_000_000
+  checkpoint_interval: 6_000_000

@@ -19,6 +19,7 @@ class VmasTask(Task):
 
     BALANCE = None
     DISCOVERY = None
+    DISCOVERY_TRANS = None
     SAMPLING = None
     NAVIGATION = None
     PASSAGE = None
@@ -37,6 +38,7 @@ class VmasTask(Task):
     SIMPLE_SPREAD = None
     SIMPLE_TAG = None
     SIMPLE_WORLD_COMM = None
+    
 
     def get_env_fun(
         self,
@@ -80,7 +82,21 @@ class VmasTask(Task):
         return None
 
     def observation_spec(self, env: EnvBase) -> CompositeSpec:
+        print("in vmas/common.py", env.observation_spec)
         observation_spec = env.unbatched_observation_spec.clone()
+        print("in vmas/common.py", observation_spec)
+        # change observation_spec 
+        old_spec = observation_spec[("agents", "observation")]
+        new_shape = list(old_spec.shape)
+        new_shape[-1] += 1  # Adding one for the cluster ID
+        import torch
+        from torchrl.data import UnboundedContinuousTensorSpec
+        new_spec = UnboundedContinuousTensorSpec(
+            shape=new_shape,
+            dtype=torch.float32,
+            device=old_spec.device
+        )
+        observation_spec[("agents", "observation")] = new_spec
         for group in self.group_map(env):
             if "info" in observation_spec[group]:
                 del observation_spec[(group, "info")]
