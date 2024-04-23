@@ -12,7 +12,7 @@ from hydra.core.hydra_config import HydraConfig
 from omegaconf import DictConfig, OmegaConf
 
 
-@hydra.main(version_base=None, config_path="conf", config_name="config_discovery")
+@hydra.main(version_base=None, config_path="conf", config_name="config_discovery_a800")
 def hydra_experiment(cfg: DictConfig) -> None:
     hydra_choices = HydraConfig.get().runtime.choices
     task_name = hydra_choices.task
